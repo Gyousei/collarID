@@ -1,0 +1,6 @@
+{
+  "name": "ConsentCard · Scene Profile & Boundaries",
+  "description": "Mobile-first collar QR safety profile, boundaries checklist, emergency protocols, and contact card for kink-adjacent scenes and nonverbal states.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
