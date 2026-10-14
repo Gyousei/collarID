@@ -1,22 +1,18 @@
 import React from 'react';
 import { useProfile } from '../context/ProfileContext';
-import { ShieldCheck, MapPin, MessageSquare, QrCode } from 'lucide-react';
+import { ShieldCheck, MapPin, MessageSquare } from 'lucide-react';
 
 interface ProfileHeroProps {
   onOpenEmergency: () => void;
-  onOpenBadge: () => void;
 }
 
-export const ProfileHero: React.FC<ProfileHeroProps> = ({
-  onOpenEmergency,
-  onOpenBadge
-}) => {
+export const ProfileHero: React.FC<ProfileHeroProps> = ({ onOpenEmergency }) => {
   const { profile } = useProfile();
 
   return (
     <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/60 mb-6 shadow-2xl">
       {/* Header Banner Image with measured contrast scrim */}
-      <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-slate-950">
+      <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-950">
         <img
           src={profile.headerImage || '/src/assets/images/collar_profile_header_1791641773596.jpg'}
           alt="Leather collar aesthetic header"
@@ -26,20 +22,27 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({
         {/* Scrim overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b0d13] via-[#0b0d13]/60 to-transparent" />
 
-        {/* Collar badge tag top right */}
-        <div className="absolute top-3 right-3 flex items-center gap-2">
-          <button
-            onClick={onOpenBadge}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-xs font-medium hover:bg-black/80 transition-colors"
-          >
-            <QrCode className="w-3.5 h-3.5 text-slate-300" />
-            <span>Collar ID</span>
-          </button>
+        {/* Profile picture inside the profile banner */}
+        <div className="absolute bottom-3.5 left-4 sm:left-6 flex items-end gap-3 z-10">
+          <div className="relative group">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-white/25 bg-[#0b0d13] shadow-2xl ring-4 ring-[#0b0d13]/90">
+              <img
+                src={profile.avatarUrl || '/src/assets/images/valco_headshot_raw.jpg'}
+                alt="Valco profile picture"
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            {/* Active collar indicator dot */}
+            <div className="absolute -bottom-1 -right-1 p-0.5 bg-[#0b0d13] rounded-full">
+              <span className="block w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#0b0d13]" title="Active Profile" />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Profile Details Container */}
-      <div className="relative px-5 pb-6 pt-2 -mt-12 sm:-mt-16">
+      <div className="relative px-5 pb-6 pt-3">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             {/* Pronoun and Role clean metadata text (Zero-pill discipline: unboxed text with · separators) */}

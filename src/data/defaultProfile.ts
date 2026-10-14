@@ -6,6 +6,7 @@ export const defaultProfile: UserProfile = {
   roles: ['Submissive', 'Puppy Play', 'Nonverbal in Scene'],
   shortBio: 'Hi. If you scanned this, I may currently be nonverbal, restrained, or in subspace. Please read my boundaries and contact info below before engaging.',
   venueOrEvent: 'Munches, Private Spaces & Play Venues',
+  avatarUrl: '/src/assets/images/valco_headshot_raw.jpg',
   headerImage: '/src/assets/images/collar_profile_header_1791641773596.jpg',
   contacts: {
     discordHandle: '@alphawuff',

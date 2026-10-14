@@ -264,6 +264,51 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ isOpen, onClose })
                   className="w-full p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white"
                 />
               </div>
+
+              <div>
+                <label className="font-semibold text-slate-300 block mb-1">Profile Picture</label>
+                <div className="flex items-start gap-3">
+                  {formData.avatarUrl && (
+                    <img
+                      src={formData.avatarUrl}
+                      alt="Avatar preview"
+                      className="w-12 h-12 rounded-xl object-cover border border-slate-700 shrink-0"
+                    />
+                  )}
+                  <div className="flex-1 space-y-2">
+                    <input
+                      type="text"
+                      value={formData.avatarUrl || ''}
+                      onChange={e => setFormData({ ...formData, avatarUrl: e.target.value })}
+                      placeholder="/src/assets/images/... or image URL"
+                      className="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono text-[11px]"
+                    />
+                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium cursor-pointer transition-colors">
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Upload Raw Image File</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={e => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = ev => {
+                              const result = ev.target?.result as string;
+                              if (result) {
+                                setFormData({ ...formData, avatarUrl: result });
+                                showToast('Raw image file loaded', 'success');
+                              }
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -543,34 +588,17 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ isOpen, onClose })
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="text-[10px] text-slate-400 block mb-0.5">Category</label>
-                    <select
-                      value={newBoundaryCategory}
-                      onChange={e => setNewBoundaryCategory(e.target.value as BoundaryCategory)}
-                      className="w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs"
-                    >
-                      <option value="touch">Touch & Physical</option>
-                      <option value="restraints">Bondage & Restraints</option>
-                      <option value="impact">Impact & Sensation</option>
-                      <option value="verbal">Verbal & Mind</option>
-                      <option value="photo">Photo & Privacy</option>
-                      <option value="aftercare">Aftercare</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-[10px] text-slate-400 block mb-0.5">Context</label>
-                    <select
-                      value={newBoundaryContext}
-                      onChange={e => setNewBoundaryContext(e.target.value as BoundaryContext)}
-                      className="w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs"
-                    >
-                      <option value="all">All Spaces</option>
-                      <option value="public_only">Public Spaces Only</option>
-                      <option value="scene_only">Scene / Play Only</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 block mb-0.5">Category</label>
+                  <select
+                    value={newBoundaryCategory}
+                    onChange={e => setNewBoundaryCategory(e.target.value as BoundaryCategory)}
+                    className="w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs"
+                  >
+                    <option value="touch">Touch and Physical space</option>
+                    <option value="verbal">Verbal and Psychological</option>
+                    <option value="restraints">Bondage and Restraints</option>
+                  </select>
                 </div>
 
                 <input

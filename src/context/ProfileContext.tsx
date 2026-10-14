@@ -28,7 +28,7 @@ interface ProfileContextType {
   setPin: (pin: string) => void;
 }
 
-const STORAGE_KEY = 'consent_card_profile_v4';
+const STORAGE_KEY = 'consent_card_profile_v6';
 const PIN_KEY = 'consent_card_pin_v1';
 
 const ProfileContext = createContext<ProfileContextType | null>(null);

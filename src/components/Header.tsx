@@ -1,18 +1,12 @@
 import React from 'react';
 import { useProfile } from '../context/ProfileContext';
-import { ShieldAlert, QrCode, Lock, Unlock, Settings2 } from 'lucide-react';
+import { Lock, Unlock, Settings2 } from 'lucide-react';
 
 interface HeaderProps {
-  onOpenEmergency: () => void;
-  onOpenBadge: () => void;
   onOpenEditor: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  onOpenEmergency,
-  onOpenBadge,
-  onOpenEditor
-}) => {
+export const Header: React.FC<HeaderProps> = ({ onOpenEditor }) => {
   const { profile, isUnlocked, hasPin, lockEditor, isEditMode, setIsEditMode } = useProfile();
 
   return (
@@ -20,8 +14,8 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
         {/* Zone 1: Single text element wordmark */}
         <div className="flex items-center gap-2 min-w-0">
-          <a href="#top" className="text-sm md:text-base font-bold tracking-tight text-white whitespace-nowrap truncate">
-            {profile.name} <span className="text-slate-400 font-normal">· Collar Card</span>
+          <a href="#top" className="text-base sm:text-lg font-bold tracking-tight text-white whitespace-nowrap truncate">
+            {profile.name}
           </a>
         </div>
 
@@ -35,27 +29,8 @@ export const Header: React.FC<HeaderProps> = ({
           </a>
         </nav>
 
-        {/* Zone 3: Primary Action buttons */}
+        {/* Zone 3: Settings/Lock control */}
         <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={onOpenEmergency}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-rose-600/90 hover:bg-rose-600 text-white shadow-sm shadow-rose-950/40 active:scale-95 transition-all min-h-[40px] whitespace-nowrap"
-            title="View safewords and emergency protocols"
-          >
-            <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
-            <span>Safewords</span>
-          </button>
-
-          <button
-            onClick={onOpenBadge}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 active:scale-95 transition-all min-h-[40px] whitespace-nowrap"
-            title="View collar QR code badge"
-          >
-            <QrCode className="w-3.5 h-3.5 text-slate-300 shrink-0" />
-            <span className="hidden xs:inline">Collar QR</span>
-          </button>
-
-          {/* Edit / Lock control */}
           <button
             onClick={() => {
               if (isUnlocked && isEditMode) {
@@ -70,7 +45,8 @@ export const Header: React.FC<HeaderProps> = ({
                 ? 'bg-amber-950/40 text-amber-300 border-amber-700/60'
                 : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:text-slate-200'
             }`}
-            title={isEditMode ? 'Exit edit mode' : 'Customize profile (wearer only)'}
+            title={isEditMode ? 'Exit edit mode' : 'Customize profile'}
+            aria-label="Settings"
           >
             {hasPin && !isUnlocked ? (
               <Lock className="w-4 h-4 text-slate-400" />

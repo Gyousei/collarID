@@ -54,6 +54,7 @@ export interface UserProfile {
   roles: string[];
   shortBio: string;
   venueOrEvent?: string;
+  avatarUrl?: string;
   headerImage?: string;
   contacts: ContactInfo;
   emergencyContact: EmergencyContact;
