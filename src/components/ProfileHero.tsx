@@ -1,6 +1,8 @@
 import React from 'react';
 import { useProfile } from '../context/ProfileContext';
 import { ShieldCheck, MapPin, MessageSquare } from 'lucide-react';
+import headerImg from '../assets/images/collar_profile_header_1791641773596.jpg';
+import avatarImg from '../assets/images/valco_headshot_raw.jpg';
 
 interface ProfileHeroProps {
   onOpenEmergency: () => void;
@@ -14,7 +16,7 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({ onOpenEmergency }) => 
       {/* Header Banner Image with measured contrast scrim */}
       <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-950">
         <img
-          src={profile.headerImage || '/src/assets/images/collar_profile_header_1791641773596.jpg'}
+          src={profile.headerImage || headerImg}
           alt="Leather collar aesthetic header"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
@@ -27,7 +29,7 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({ onOpenEmergency }) => 
           <div className="relative group">
             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-white/25 bg-[#0b0d13] shadow-2xl ring-4 ring-[#0b0d13]/90">
               <img
-                src={profile.avatarUrl || '/src/assets/images/valco_headshot_raw.jpg'}
+                src={profile.avatarUrl || avatarImg}
                 alt="Valco profile picture"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
